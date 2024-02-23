@@ -1,10 +1,10 @@
-import blogFetch from '../axios/config';
+import blogFetch from "../axios/config"
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import Card from '../components/Card/Card';
+
 
 import "./Home.css";
-import axios from 'axios';
 
 const Home = () => {
     const [posts, setPosts] = useState([]);
@@ -29,8 +29,20 @@ const Home = () => {
 
     return (
         <div>
-            <h1>Carregando...</h1>
-         {/*aqui vai o map  -> colocr um botao de ler mais que leva para os detalhes do post*/}
+            <div>
+                {posts.length === 0 ? (<p>Carregando...</p>) : (
+                    posts.map((post) => (
+                        <Card 
+                            key={post.id}
+                            cardTitle={post.title}
+                            cardParagraph={post.body}
+                            cardDetails={'/'}
+                        />
+                    ))
+                )} 
+                
+            </div>
+            
         </div>
     );
 };
